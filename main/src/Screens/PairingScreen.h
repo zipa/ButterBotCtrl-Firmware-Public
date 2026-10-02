@@ -2,6 +2,8 @@
 #define BUTTERBOTCTRL_FIRMWARE_PAIRINGSCREEN_H
 
 #include <LV_Interface/LVScreen.h>
+#include <Services/ButtonInput.h>
+#include "Enums.hpp"
 #include "BLE/GAP.h"
 #include "Services/Com.h"
 #include "Services/LEDController.h"
@@ -15,8 +17,13 @@ private:
 	BLE::GAP* gap;
 	Com* com;
 	LEDController* ledController;
+	ButtonInput* buttonInput;
 
 	void loop() override;
+
+	void buildSettingsHint();
+
+	void handleButtonEvent(Button btn, ButtonInput::Action action);
 };
 
 

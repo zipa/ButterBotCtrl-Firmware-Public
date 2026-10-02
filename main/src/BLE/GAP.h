@@ -21,6 +21,7 @@ public:
 	bool isConnected();
 	bool isConnecting();
 	void connect();
+	void disconnect();
 
 	enum class ConnEvent { Connected, Failed };
 	DECLARE_EVENT(OnConnEvent, GAP, ConnEvent);

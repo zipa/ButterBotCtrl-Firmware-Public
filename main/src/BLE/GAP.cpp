@@ -44,6 +44,26 @@ void BLE::GAP::connect(){
 	ESP_ERROR_CHECK(esp_ble_gap_set_scan_params(&ScanParams));
 }
 
+void BLE::GAP::disconnect(){
+	if(state == Idle){
+		return;
+	}
+
+	if(state == Scanning){
+		state = Stopping;
+		esp_ble_gap_stop_scanning();
+		return;
+	}
+
+	if(state == Stopping){
+		result.found = false;
+		return;
+	}
+
+	state = Idle;
+	esp_ble_gap_disconnect(result.addr);
+}
+
 void BLE::GAP::setClient(Client* client){
 	this->client = client;
 }
